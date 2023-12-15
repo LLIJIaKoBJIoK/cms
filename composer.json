@@ -1,0 +1,15 @@
+{
+    "name": "llibilliku/cms",
+    "authors": [
+        {
+            "name": "Vladimir"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Engine\\": "engine//",
+            "App\\": "app//"
+        }
+    }
+}
