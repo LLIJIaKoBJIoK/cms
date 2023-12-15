@@ -7,7 +7,6 @@ use Engine\CMS;
 
 try {
   $di  = new DI();
-  $cms = new CMS($di);
 
   $services = require_once __DIR__ . '/../config/services.php';
   foreach ($services as $service)
@@ -16,6 +15,7 @@ try {
     $provider->init();
   }
 
+  $cms = new CMS($di);
   $cms->run();
 
 } catch (ErrorException $exception) {

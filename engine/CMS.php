@@ -11,7 +11,6 @@ class CMS
 
     public function __construct(DI $di)
     {
-      var_dump($di);
       $this->di = $di;
       $this->router = $this->di->get('router');
     }
