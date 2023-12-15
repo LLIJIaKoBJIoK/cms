@@ -10,4 +10,9 @@ class Router
   {
     $this->routes = $routes;
   }
+
+  public function dispatch()
+  {
+
+  }
 }

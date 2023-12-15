@@ -6,7 +6,7 @@ use Engine\DI\DI;
 use Engine\CMS;
 
 try {
-  $di  = new DI;
+  $di  = new DI();
   $cms = new CMS($di);
 
   $services = require_once __DIR__ . '/../config/services.php';

@@ -10,4 +10,9 @@ class DI
   {
     $this->container[$key] = $value;
   }
+
+  public function get($key)
+  {
+    return $this->container[$key] ?? null;
+  }
 }
