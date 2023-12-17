@@ -11,8 +11,12 @@ class Router
     $this->routes = $routes;
   }
 
-  public function dispatch()
+  public function dispatch($uri)
   {
-
+    if(array_key_exists($uri, $this->routes))
+    {
+      $route = $this->routes[$uri];
+      call_user_func_array(array($route['controller'], $route['action']), array());
+    }
   }
 }

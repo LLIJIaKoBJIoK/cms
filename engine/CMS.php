@@ -3,11 +3,12 @@
 namespace Engine;
 
 use Engine\DI\DI;
+use Engine\Core\Router\Router;
 
 class CMS
 {
     private DI $di;
-    private $router;
+    private Router $router;
 
     public function __construct(DI $di)
     {
@@ -17,6 +18,6 @@ class CMS
 
     public function run() : void
     {
-      print_r($this->router);
+      $this->router->dispatch($_SERVER['REQUEST_URI']);
     }
 }
