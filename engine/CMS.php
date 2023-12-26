@@ -3,6 +3,7 @@
 namespace Engine;
 
 use Engine\DI\DI;
+use Engine\Helper\Common;
 
 class CMS
 {
@@ -17,6 +18,11 @@ class CMS
 
     public function run() : void
     {
-      print_r($this->router);
+      $this->router->add('home', '/', 'HomeController/index', 'GET');
+      $this->router->add('contact', '/contact', 'ContactController', 'GET');
+
+      $dispatcher = $this->router->dispatch(Common::getMethod(), Common::getUrl());
+      print_r($dispatcher);
+
     }
 }

@@ -11,9 +11,7 @@ class Provider extends AbstractProvider
 
   public function init(): void
   {
-    $routes = require_once __DIR__ . '/../../../config/routes.php';
-
-    $router = new Router($routes);
+    $router = new Router('localhost');
     $this->di->add($this->serviceName, $router);
   }
 }

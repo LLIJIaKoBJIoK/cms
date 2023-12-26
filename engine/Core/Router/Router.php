@@ -2,17 +2,46 @@
 
 namespace Engine\Core\Router;
 
+use Engine\Core\Router\UrlDispatcher;
+
 class Router
 {
-  private array $routes;
+  private array $routes = [];
+  private string $host;
+  private UrlDispatcher $dispatcher;
 
-  public function __construct(array $routes)
+  public function __construct($host)
   {
-    $this->routes = $routes;
+    $this->host = $host;
   }
 
-  public function dispatch()
+  public function add($key, $pattern, $controller, $method = 'GET')
   {
-
+    $this->routes[$key] = [
+      'pattern'    => $pattern,
+      'controller' => $controller,
+      'method'     => $method
+    ];
   }
+
+  public function dispatch($method, $uri)
+  {
+    return $this->getDispatcher()->dispatch($method, $uri);
+  }
+
+  public function getDispatcher() : UrlDispatcher
+  {
+    if($this->dispatcher == null)
+    {
+      $this->dispatcher = new UrlDispatcher();
+
+      foreach ($this->routes as $route) {
+        $this->dispatcher->register($route['method'], $route['pattern'], $route['controller']);
+      }
+    }
+
+    return $this->dispatcher;
+  }
+
+
 }
