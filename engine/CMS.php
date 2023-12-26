@@ -4,11 +4,12 @@ namespace Engine;
 
 use Engine\DI\DI;
 use Engine\Helper\Common;
+use Engine\Core\Router\Router;
 
 class CMS
 {
     private DI $di;
-    private $router;
+    private Router $router;
 
     public function __construct(DI $di)
     {

@@ -2,13 +2,11 @@
 
 namespace Engine\Core\Router;
 
-use Engine\Core\Router\UrlDispatcher;
-
 class Router
 {
   private array $routes = [];
   private string $host;
-  private UrlDispatcher $dispatcher;
+  private $dispatcher;
 
   public function __construct($host)
   {
@@ -18,9 +16,9 @@ class Router
   public function add($key, $pattern, $controller, $method = 'GET')
   {
     $this->routes[$key] = [
-      'pattern'    => $pattern,
+      'pattern' => $pattern,
       'controller' => $controller,
-      'method'     => $method
+      'method' => $method
     ];
   }
 
@@ -29,7 +27,7 @@ class Router
     return $this->getDispatcher()->dispatch($method, $uri);
   }
 
-  public function getDispatcher() : UrlDispatcher
+  public function getDispatcher()
   {
     if($this->dispatcher == null)
     {
@@ -42,6 +40,4 @@ class Router
 
     return $this->dispatcher;
   }
-
-
 }
