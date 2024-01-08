@@ -2,10 +2,23 @@
 
 namespace App\Controller;
 
-class HomeController
+use Engine\Core\AbstractController;
+use Engine\DI\DI;
+
+class HomeController extends AbstractController
 {
-  public static function index()
+  public function __construct(DI $di)
   {
-    echo 'HomeController/index';
+    parent::__construct($di);
+  }
+
+  public function index()
+  {
+    echo 'HomeController - action: index';
+  }
+
+  public function contact()
+  {
+    echo 'HomeController - action: contact';
   }
 }
