@@ -2,6 +2,7 @@
 
 namespace Engine;
 
+use Engine\Core\Router\DispatchedRoute;
 use Engine\DI\DI;
 use Engine\Helper\Common;
 use Engine\Core\Router\Router;
@@ -23,6 +24,11 @@ class CMS
       $this->router->add('contact', '/contact', 'HomeController/contact', 'GET');
 
       $dispatcher = $this->router->dispatch(Common::getMethod(), Common::getUrl());
+      if ($dispatcher == null)
+      {
+        $dispatcher = new DispatchedRoute('ErrorController/page404');
+      }
+
       list($class, $action) = explode('/', $dispatcher->getController());
       $controller = 'App\\Controller\\' . $class;
       call_user_func_array([new $controller($this->di), $action], $dispatcher->getParameters());
