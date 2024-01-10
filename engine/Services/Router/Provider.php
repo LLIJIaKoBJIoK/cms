@@ -9,7 +9,10 @@ class Provider extends AbstractProvider
 {
   public string $serviceName = 'router';
 
-  public function init(): void
+  /**
+   * @return void
+   */
+  public function init()
   {
     $router = new Router('localhost');
     $this->di->add($this->serviceName, $router);

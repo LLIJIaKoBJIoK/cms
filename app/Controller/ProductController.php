@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
-class ProductController
+use Engine\Core\AbstractController;
+
+class ProductController extends AbstractController
 {
-  public static function index()
+  public function index()
   {
-    echo 'ProductController/index';
+    echo 'ProductController - action: index';
   }
 
-  public static function item()
+  public function all()
   {
-    echo 'ProductController/item';
+    echo 'ProductController - action: all';
   }
 }

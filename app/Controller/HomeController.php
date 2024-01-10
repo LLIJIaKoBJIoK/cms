@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Engine\Core\AbstractController;
-use Engine\DI\DI;
 
 class HomeController extends AbstractController
 {
