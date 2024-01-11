@@ -34,7 +34,7 @@ class Router
    * @param $uri
    * @return DispatchedRoute|null
    */
-  public function dispatch($method, $uri) : DispatchedRoute
+  public function dispatch($method, $uri)
   {
     return $this->getUrlDispatcher()->dispatch($method, $uri);
   }

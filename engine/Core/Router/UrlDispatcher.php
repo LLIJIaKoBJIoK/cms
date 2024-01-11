@@ -15,6 +15,7 @@ class UrlDispatcher
   ];
 
   private array $pattern = [
+    'id'  => '[0-9]+',
     'int' => '[0-9]+',
     'str' => '[a-zA-Z\.\-_%]+',
   ];
@@ -46,8 +47,8 @@ class UrlDispatcher
    */
   public function register($method, $pattern, $controller)
   {
-    $convertPattern = $this->convertPattern($pattern);
-    $this->routes[$method][$convertPattern] = $controller;
+    $convert = $this->convertPattern($pattern);
+    $this->routes[$method][$convert] = $controller;
   }
 
   private function convertPattern($pattern)
@@ -56,9 +57,13 @@ class UrlDispatcher
     {
       return $pattern;
     }
-    $a = preg_match('#^[0-9]+$#', $pattern, $matches);
-    print_r($a);
-    return $a;
+    return preg_replace_callback('(\w+)', [$this, 'replacePattern'], $pattern);
+  }
+
+  private function replacePattern($matches)
+  {
+    print_r($matches);
+    //return strtr($matches[1], [$matches[1], $this->pattern]);
   }
 
   /**
@@ -66,7 +71,7 @@ class UrlDispatcher
    * @param $uri
    * @return DispatchedRoute|null
    */
-  public function dispatch($method, $uri) : DispatchedRoute
+  public function dispatch($method, $uri)
   {
     $routes = $this->routes($method);
 
@@ -83,7 +88,7 @@ class UrlDispatcher
    * @param $uri
    * @return DispatchedRoute|void
    */
-  private function doDispatch($method, $uri) : DispatchedRoute
+  private function doDispatch($method, $uri)
   {
     foreach ($this->routes($method) as $route => $controller) {
       $pattern = '#^' . $route . '$#s';
