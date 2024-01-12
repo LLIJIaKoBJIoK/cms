@@ -6,9 +6,10 @@ use Engine\Core\AbstractController;
 
 class ProductController extends AbstractController
 {
-  public function index()
+  public function index($id)
   {
-    echo 'ProductController - action: index';
+    print_r('ProductController - action: index' . "<br>");
+    print_r("id: " . $id);
   }
 
   public function all()

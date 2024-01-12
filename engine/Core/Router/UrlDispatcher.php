@@ -14,10 +14,8 @@ class UrlDispatcher
     'POST' => []
   ];
 
-  private array $pattern = [
-    'id'  => '[0-9]+',
-    'int' => '[0-9]+',
-    'str' => '[a-zA-Z\.\-_%]+',
+  private array $patterns = [
+    '{id}'  => '([0-9]+)',
   ];
 
   /**
@@ -47,23 +45,25 @@ class UrlDispatcher
    */
   public function register($method, $pattern, $controller)
   {
-    $convert = $this->convertPattern($pattern);
+    $convert = $this->replacePattern($pattern);
     $this->routes[$method][$convert] = $controller;
   }
 
-  private function convertPattern($pattern)
+  /**
+   * @param $pattern
+   * @return array|mixed|string|string[]|void
+   */
+  private function replacePattern($pattern)
   {
-    if(strpos($pattern, '{') === false)
+    foreach ($this->patterns as $key => $value)
     {
+      if(strpos($pattern, $key))
+      {
+        return str_replace($key, $this->patterns[$key], $pattern);
+      }
+
       return $pattern;
     }
-    return preg_replace_callback('(\w+)', [$this, 'replacePattern'], $pattern);
-  }
-
-  private function replacePattern($matches)
-  {
-    print_r($matches);
-    //return strtr($matches[1], [$matches[1], $this->pattern]);
   }
 
   /**
@@ -91,7 +91,7 @@ class UrlDispatcher
   private function doDispatch($method, $uri)
   {
     foreach ($this->routes($method) as $route => $controller) {
-      $pattern = '#^' . $route . '$#s';
+      $pattern = '#^' . $route . '$#';
 
       if (preg_match($pattern, $uri, $parameters))
       {
