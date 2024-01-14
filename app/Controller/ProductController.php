@@ -9,7 +9,7 @@ class ProductController extends AbstractController
   public function index($param)
   {
     print_r('ProductController - action: index' . "<br>");
-    var_dump($param['slug']);
+    print_r($param['id']);
   }
 
   public function all()
