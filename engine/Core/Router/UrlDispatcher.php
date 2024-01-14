@@ -81,6 +81,23 @@ class UrlDispatcher
   }
 
   /**
+   * @param $param
+   * @return mixed
+   */
+  private function clearParameters($param)
+  {
+    foreach ($param as $key => $value)
+    {
+      if(is_int($key))
+      {
+        unset($param[$key]);
+      }
+    }
+
+    return $param;
+  }
+
+  /**
    * @param $method
    * @param $uri
    * @return DispatchedRoute|null
@@ -109,7 +126,7 @@ class UrlDispatcher
 
       if (preg_match($pattern, $uri, $parameters))
       {
-        return new DispatchedRoute($controller, $parameters);
+        return new DispatchedRoute($controller, $this->clearParameters($parameters));
       }
     }
   }
