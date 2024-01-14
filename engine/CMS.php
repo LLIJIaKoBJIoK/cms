@@ -23,7 +23,7 @@ class CMS
     try{
       $this->router->add('home', '/', 'HomeController/index', 'GET');
       $this->router->add('contact', '/contact', 'HomeController/contact', 'GET');
-      $this->router->add('product', '/product/{id}', 'ProductController/index', 'GET');
+      $this->router->add('product', '/product/{slug}/{id}', 'ProductController/index', 'GET');
       $this->router->add('product_all', '/product/all', 'ProductController/all', 'GET');
 
       $dispatcher = $this->router->dispatch(Common::getMethod(), Common::getUrl());

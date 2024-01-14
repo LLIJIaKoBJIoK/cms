@@ -15,7 +15,8 @@ class UrlDispatcher
   ];
 
   private array $patterns = [
-    '{id}'  => '([0-9]+)',
+    '{id}'    => '(?<id>[0-9]+)',
+    '{slug}'  => '(?<slug>[a-z0-9_-]+)',
   ];
 
   /**
@@ -45,25 +46,38 @@ class UrlDispatcher
    */
   public function register($method, $pattern, $controller)
   {
-    $convert = $this->replacePattern($pattern);
+    $convert = $this->findPattern($pattern);
     $this->routes[$method][$convert] = $controller;
   }
 
   /**
    * @param $pattern
-   * @return array|mixed|string|string[]|void
+   * @return array|mixed|string|string[]|null
    */
-  private function replacePattern($pattern)
+  private function findPattern($pattern)
   {
-    foreach ($this->patterns as $key => $value)
+    if(strpos($pattern, '{') === false)
     {
-      if(strpos($pattern, $key))
-      {
-        return str_replace($key, $this->patterns[$key], $pattern);
-      }
-
       return $pattern;
     }
+    return preg_replace_callback('/\{(\w+)}/', [$this, 'replacePattern'], $pattern);
+  }
+
+  /**
+   * @param $matches
+   * @return mixed|string|null
+   */
+  private function replacePattern($matches)
+  {
+    foreach ($matches as $key)
+    {
+      if (array_key_exists($key, $this->patterns))
+      {
+        return $this->patterns[$key];
+      }
+    }
+
+    return null;
   }
 
   /**
