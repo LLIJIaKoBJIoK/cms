@@ -88,7 +88,7 @@ class UrlDispatcher
   {
     foreach ($param as $key => $value)
     {
-      if(is_int($key))
+      if(!is_int($key) or $key == 0)
       {
         unset($param[$key]);
       }

@@ -25,6 +25,7 @@ class CMS
       $this->router->add('contact', '/contact', 'HomeController/contact', 'GET');
       $this->router->add('product', '/product/{id}', 'ProductController/index', 'GET');
       $this->router->add('product_all', '/product/all', 'ProductController/all', 'GET');
+      $this->router->add('product_test', '/product/{slug}/{id}', 'ProductController/test', 'GET');
 
       $dispatcher = $this->router->dispatch(Common::getMethod(), Common::getUrl());
       $routeNamespace = 'App\\Controller\\';
@@ -38,7 +39,8 @@ class CMS
         list($class, $action) = explode('/', $dispatcher->getController());
         $controller = $routeNamespace . $class;
         $parameters = $dispatcher->getParameters();
-        call_user_func_array([new $controller($this->di), $action], array ($parameters));
+        print_r($parameters);
+        call_user_func_array([new $controller($this->di), $action], [...$parameters]);
 
       } catch (\ErrorException $exception)
       {
