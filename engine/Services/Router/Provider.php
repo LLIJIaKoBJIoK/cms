@@ -7,14 +7,14 @@ use Engine\Core\Router\Router;
 
 class Provider extends AbstractProvider
 {
-  public string $serviceName = 'router';
+  private string $serviceName = 'router';
 
   /**
    * @return void
    */
   public function init()
   {
-    $router = new Router('localhost');
-    $this->di->add($this->serviceName, $router);
+    $service = new Router('localhost');
+    $this->di->add($this->serviceName, $service);
   }
 }

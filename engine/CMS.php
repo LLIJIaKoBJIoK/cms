@@ -39,7 +39,6 @@ class CMS
         list($class, $action) = explode('/', $dispatcher->getController());
         $controller = $routeNamespace . $class;
         $parameters = $dispatcher->getParameters();
-        print_r($parameters);
         call_user_func_array([new $controller($this->di), $action], [...$parameters]);
 
       } catch (\ErrorException $exception)

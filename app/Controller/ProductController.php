@@ -8,8 +8,9 @@ class ProductController extends AbstractController
 {
   public function index($id)
   {
-    print_r('ProductController - action: index' . "<br>");
-    print_r($id);
+    $this->render( __DIR__  . '/../Templates/layout.php', [
+      'id' => $id,
+    ]);
   }
 
   public function all()
@@ -19,8 +20,10 @@ class ProductController extends AbstractController
 
   public function test($slug, $id)
   {
-    echo 'ProductController - action: test';
-    print_r($slug . "-" . $id);
+    $this->render( __DIR__  . '/../Templates/layout.php', [
+      'slug' => $slug,
+      'id'   => $id,
+    ]);
   }
 
 }

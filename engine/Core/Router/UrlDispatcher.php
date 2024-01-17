@@ -4,10 +4,6 @@ namespace Engine\Core\Router;
 
 class UrlDispatcher
 {
-  private array $methods =[
-    'GET',
-    'POST'
-  ];
 
   private array $routes = [
     'GET'  => [],

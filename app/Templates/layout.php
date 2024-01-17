@@ -4,6 +4,6 @@
     <title>Home-Page</title>
 </head>
     <div>
-        Poshli nahui pidarasi
+      {id}, {slug}
     </div>
 </html>
