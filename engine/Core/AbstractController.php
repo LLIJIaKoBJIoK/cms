@@ -3,27 +3,22 @@
 namespace Engine\Core;
 
 use Engine\DI\DI;
-use Engine\Core\Http\Response;
-use Engine\Helper\Common;
+use Engine\Core\Template\Template;
 
 class AbstractController
 {
   protected DI $di;
+  protected Template $template;
 
   public function __construct(DI $di)
   {
     $this->di = $di;
+    $this->di->get('template');
   }
 
-  /**
-   * @param $view
-   * @param $parameters
-   * @return void
-   */
-  function render($view, array $parameters = [])
+  function render(string $template, array $parameters = [])
   {
-    $content = Common::replaceHTML($view, $parameters);
-    $response = new Response($content);
-    $response->send();
+    $this->template = new Template();
+    $this->template->loadTemplate($template, $parameters);
   }
 }

@@ -8,7 +8,7 @@ class ProductController extends AbstractController
 {
   public function index($id)
   {
-    $this->render( __DIR__  . '/../Templates/layout.php', [
+    $this->render( 'layout', [
       'id' => $id,
     ]);
   }
