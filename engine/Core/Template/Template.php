@@ -28,7 +28,7 @@ class Template
   {
     ob_start();
     extract($this->parameters);
-    include $this->template;
+    require $this->template;
     echo ob_end_clean();
   }
 }
