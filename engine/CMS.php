@@ -20,7 +20,6 @@ class CMS
 
   public function run() : void
   {
-    print_r($this->di);
     try{
       $this->router->add('home', '/', 'HomeController/index', 'GET');
       $this->router->add('contact', '/contact', 'HomeController/contact', 'GET');

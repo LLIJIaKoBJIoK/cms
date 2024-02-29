@@ -20,7 +20,7 @@ class ProductController extends AbstractController
 
   public function test($slug, $id)
   {
-    $this->render( __DIR__  . '/../Templates/layout.php', [
+    $this->render( __DIR__ . '/../Templates/base_html.php', [
       'slug' => $slug,
       'id'   => $id,
     ]);

@@ -8,7 +8,7 @@ class HomeController extends AbstractController
 {
   public function index()
   {
-    echo 'HomeController - action: index';
+    echo $this->render('HomeController Template', ['param1' => 'Value']);
   }
 
   public function contact()
